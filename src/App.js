@@ -1,17 +1,66 @@
-import React, { Component } from 'react';
-import Titles from './component/Titles';
-import Form from './component/Form';
-import Weather from './component/Weather';
+import React from 'react';
+import Axios from 'axios';
+import './App.css';
+import DisplayWeather from './component/DisplayWeather.js'
+import Navbar from './navbar/Navbar';
 
-const API_KEY = "8b8a2a4a64a0391912ad8bd7b4c1503c";
+class App extends React.Component {
 
-class App extends Component {
+  // State
+  state = {
+    coords: {
+      latitude: 45,
+      longitude: 60
+    },
+    data: {}
+  }
+
+  componentDidMount() {
+    // Get Device Location
+
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let newCoords = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        }
+
+        this.setState({coords: newCoords})
+
+        // API CALL
+        Axios.get(`http://api.weatherstack.com/current?access_key=14e0ad077fd1dea3ad9ab4b1d8854270&query=
+        ${this.state.coords.latitude},${this.state.coords.longitude}`).then(res => {
+
+          let weatherData =  {
+              location: res.data.location.name,
+              temperature: res.data.current.temperature,
+              description: res.data.current.weather_descriptions[0],
+              region: res.data.location.region,
+              country: res.data.location.country,
+              wind_speed: res.data.current.wind_speed,
+              pressure: res.data.current.pressure,
+              precip: res.data.current.precip,
+              humidity: res.data.current.humidity,
+              img: res.data.current.weather_icons
+          }
+
+          this.setState({ data: weatherData });
+
+        })
+
+      })
+    } else {
+      console.log('Not Supported')
+    }
+  }
+
   render() {
     return (
-      <div>
-        <Titles />
-        <Form />
-        <Weather />
+      <div className="App">
+        <Navbar />
+        <div className="container" >
+        <DisplayWeather weatherData={this.state.data} />
+        </div>
       </div>
     )
   }
