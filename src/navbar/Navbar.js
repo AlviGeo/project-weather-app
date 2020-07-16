@@ -30,11 +30,11 @@ function Navbar(props)  {
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" href="#">
-                  Action
+                  Aye
                 </a>
                 <div className="dropdown-divider" />
                 <a className="dropdown-item" href="#">
-                  Coming soon
+                  Aye
                 </a>
               </div>
             </li>
@@ -48,7 +48,6 @@ function Navbar(props)  {
           </form>
         </div>
       </nav>
-      <br />
       <br />
     </div>
     );

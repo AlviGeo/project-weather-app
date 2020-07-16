@@ -2,7 +2,7 @@ import React from "react";
 import Axios from "axios";
 import "./App.css";
 import DisplayWeather from "./component/DisplayWeather.js";
-import Navbar from "./navbar/Navbar-me";
+import Navbar from "./navbar/Navbar";
 import NavbarW from "./component/NavbarW";
 
 class App extends React.Component {
