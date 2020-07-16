@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import './navbar.scss';
 
-class Navbar extends Component {
-  render() {
+function Navbar(props)  {
+
     return (
       <div>
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -39,8 +39,9 @@ class Navbar extends Component {
               </div>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="search" placeholder="Type Your City" aria-label="Search" />
+          <form className="form-inline my-2 my-lg-0" onSubmit={(e) => props.changeWeather(e)}>
+            <input className="form-control mr-sm-2" placeholder="Type Your City"
+                  onChange={(e) =>(props.changeRegion(e.target.value))} />
             <button className="btn btn-primary my-2 my-sm-0" type="submit">
               Enter
             </button>
@@ -48,9 +49,9 @@ class Navbar extends Component {
         </div>
       </nav>
       <br />
+      <br />
     </div>
     );
   }
-}
 
 export default Navbar;
