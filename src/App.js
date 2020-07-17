@@ -1,5 +1,5 @@
 import React from "react";
-import Axios from "axios";
+import axios from "axios";
 import "./App.css";
 import DisplayWeather from "./component/DisplayWeather.js";
 import Navbar from "./navbar/Navbar";
@@ -28,25 +28,28 @@ class App extends React.Component {
         this.setState({ coords: newCoords });
 
         // API CALL
-        Axios.get(
-          `http://api.weatherstack.com/current?access_key=14e0ad077fd1dea3ad9ab4b1d8854270&query=
+        axios
+          .get(
+            `http://api.weatherstack.com/current?access_key=14e0ad077fd1dea3ad9ab4b1d8854270&query=
         ${this.state.coords.latitude},${this.state.coords.longitude}`
-        ).then((res) => {
-          let weatherData = {
-            location: res.data.location.name,
-            temperature: res.data.current.temperature,
-            description: res.data.current.weather_descriptions[0],
-            region: res.data.location.region,
-            country: res.data.location.country,
-            wind_speed: res.data.current.wind_speed,
-            pressure: res.data.current.pressure,
-            precip: res.data.current.precip,
-            humidity: res.data.current.humidity,
-            img: res.data.current.weather_icons,
-          };
+          )
+          .then((res) => {
+            console.log(res);
+            let weatherData = {
+              location: res.data.location.name,
+              temperature: res.data.current.temperature,
+              description: res.data.current.weather_descriptions[0],
+              region: res.data.location.region,
+              country: res.data.location.country,
+              wind_speed: res.data.current.wind_speed,
+              pressure: res.data.current.pressure,
+              precip: res.data.current.precip,
+              humidity: res.data.current.humidity,
+              img: res.data.current.weather_icons,
+            };
 
-          this.setState({ data: weatherData });
-        });
+            this.setState({ data: weatherData });
+          });
       });
     } else {
       console.log("Not Supported");
@@ -61,24 +64,30 @@ class App extends React.Component {
     event.preventDefault();
 
     //API CALL
-    Axios.get(
-      `http://api.weatherstack.com/current?access_key=14e0ad077fd1dea3ad9ab4b1d8854270&query=${this.state.inputData}`
-    ).then((res) => {
-      let weatherData = {
-        location: res.data.location.name,
-        temperature: res.data.current.temperature,
-        description: res.data.current.weather_descriptions[0],
-        region: res.data.location.region,
-        country: res.data.location.country,
-        wind_speed: res.data.current.wind_speed,
-        pressure: res.data.current.pressure,
-        precip: res.data.current.precip,
-        humidity: res.data.current.humidity,
-        img: res.data.current.weather_icons,
-      };
+    axios
+      .get(
+        `http://api.weatherstack.com/current?access_key=14e0ad077fd1dea3ad9ab4b1d8854270&query=${this.state.inputData}`
+      )
+      .then((res) => {
+        console.log(res);
+        let weatherData = {
+          location: res.data.location.name,
+          temperature: res.data.current.temperature,
+          description: res.data.current.weather_descriptions[0],
+          region: res.data.location.region,
+          country: res.data.location.country,
+          wind_speed: res.data.current.wind_speed,
+          pressure: res.data.current.pressure,
+          precip: res.data.current.precip,
+          humidity: res.data.current.humidity,
+          img: res.data.current.weather_icons,
+        };
 
-      this.setState({ data: weatherData });
-    });
+        this.setState({ data: weatherData });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {
