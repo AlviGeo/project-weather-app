@@ -1,6 +1,5 @@
 import React from "react";
 import "../App.css";
-import sea from "../img/sea.jpeg";
 
 function DisplayWeather(props) {
   const {
