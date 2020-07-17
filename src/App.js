@@ -86,10 +86,6 @@ class App extends React.Component {
       <div className="App">
         <Navbar changeWeather={this.changeWeather} changeRegion={this.change} />
         <div className="container">
-          {/* <NavbarW
-            changeWeather={this.changeWeather}
-            changeRegion={this.change}
-          /> */}
           <DisplayWeather weatherData={this.state.data} />
         </div>
       </div>
